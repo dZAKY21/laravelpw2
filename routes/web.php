@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FakultasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,10 @@ Route::get('/', function () {
 });
 
 
-Route::get('/fakultas', function () {
-    return view('fakultas');
-});
+// Route::get('/fakultas', function () {
+//     return view('fakultas');
+// });
+Route::resource('fakultas', FakultasController::class);
 
 Route::get('/prodi', function () {
     return view('prodi');
