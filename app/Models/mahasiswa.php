@@ -2,10 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class mahasiswa extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    protected $table = 'mahasiswas';
+
+    protected $fillable = [
+        'npm',
+        'nama',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'foto',
+        'prodi_id'
+    ];
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id');
+    }
 }

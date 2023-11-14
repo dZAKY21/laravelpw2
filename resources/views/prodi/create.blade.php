@@ -23,15 +23,16 @@
                                 <input type="text" class="form-control" name="nama" placeholder="Name Prodi">
                                 @error('nama')
                                     <label class="text-danger">{{ $message }} </ label>
-                                        <select name="fakultas_id" class="form-control">
-                                            <option value="">Pilih</option>
-                                            {{-- option diambil dari Model Fakultas --}}
-                                        </select>
                                     @enderror
                             </div>
                             <div class="form-group">
                                 <label for="fakultas_id">Nama Fakultas</label>
-
+                                <select name="fakultas_id" class="form-control">
+                                    <option value="">Pilih</option>
+                                    @foreach ($fakultas as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <a href="{{ url('fakultas') }}" class="btn btn-light">Batal</button>
                         </form>

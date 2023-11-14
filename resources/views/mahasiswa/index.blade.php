@@ -11,7 +11,7 @@
                         Daftar Mahasiswa Universitas Multi Data Palembang
 
                     </p>
-                    <a href="{{ route('fakultas.create') }}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
+                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary btn-rounded btn-fw">Tambah</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -30,12 +30,12 @@
                                     <tr>
                                         <td>{{ $item['npm'] }}</td>
                                         <td>{{ $item['nama'] }}</td>
-                                        <td>{{ $item['tmpt_lahir'] }}</td>
-                                        <td>{{ $item['tgl_lahir'] }}</td>
-                                        <td><img src="images/{{ $item['foto'] }}" class="rounded-circle" width="70px" />
+                                        <td>{{ $item['tempat_lahir'] }}</td>
+                                        <td>{{ $item['tanggal_lahir'] }}</td>
+                                        <td><img src="foto/{{ $item['foto'] }}" class="rounded-circle" width="70px" />
                                         </td>
                                         <td>{{ $item['prodi']['nama'] }}</td>
-                                        <td>{{ $item['prodi']['fakulitas']['nama'] }}</td>
+                                        <td>{{ $item['prodi']['fakultas']['nama'] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
