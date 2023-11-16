@@ -63,7 +63,8 @@ class MahasiswaController extends Controller
      */
     public function edit(mahasiswa $mahasiswa)
     {
-        //
+        $prodi = Prodi::all();
+        return view("mahasiswa.edit")->with("mahasiswa", $mahasiswa)->with("prodi", $prodi);
     }
 
     /**
@@ -79,6 +80,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        return redirect()->route("mahasiswa.index")->with("success", "Berhasil Dihapus");
     }
 }

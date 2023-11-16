@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 </head>
 <body>
   <div class="container-scroller d-flex">
@@ -325,6 +326,8 @@
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
   <!-- End custom js for this page-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+  @yield('scripts')
 </body>
 
 </html>

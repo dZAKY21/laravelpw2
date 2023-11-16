@@ -23,6 +23,7 @@
                                     <th>Foto</th>
                                     <th>Nama Prodi</th>
                                     <th>Nama Fakultas</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +37,18 @@
                                         </td>
                                         <td>{{ $item['prodi']['nama'] }}</td>
                                         <td>{{ $item['prodi']['fakultas']['nama'] }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{ route('mahasiswa.edit', $item->id) }}">
+                                                    <button class="btn btn-success btn-sm mx-3">Edit</button>
+                                                </a>
+                                                <form method="post" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -45,5 +58,14 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+    <script>
+        @if (Session::get('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+    </script>
 
 @endsection
