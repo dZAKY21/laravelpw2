@@ -42,10 +42,13 @@
                                                 <a href="{{ route('mahasiswa.edit', $item->id) }}">
                                                     <button class="btn btn-success btn-sm mx-3">Edit</button>
                                                 </a>
-                                                <form method="post" action="{{ route('mahasiswa.destroy', $item->id) }}">
-                                                    @method('delete')
+                                                <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
                                                     @csrf
-                                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="submit"
+                                                        class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                                        data-toggle="tooltip" title='Delete'
+                                                        data-nama='{{ $item->nama }}'>Hapus</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -67,5 +70,28 @@
             toastr.success("{{ Session::get('success') }}");
         @endif
     </script>
+
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form = $(this).closest("form");
+        var nama = $(this).data("nama");
+        event.preventDefault();
+        swal({
+                title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+</script>
+
+</body>
+</html>
 
 @endsection
