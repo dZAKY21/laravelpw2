@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->String('nama', 50);
             $table->String('tempat_lahir', 50);
             $table->Date('tanggal_lahir');
-            $table->String('foto', 50);
+            $table->String('foto', 50)->nullable;
             $table->uuid('prodi_id');
             $table->foreign('prodi_id')->references
             ('id')->on('prodis')->restrictOnDelete()->restrictOnUpdate();

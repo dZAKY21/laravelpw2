@@ -20,13 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::middleware('auth')->group(function(){
+    Route::resource('fakultas', FakultasController::class);
+    Route::resource('prodi', ProdiController::class);
+    Route::resource('mahasiswa', MahasiswaController::class);
+});
 // Route::get('/fakultas', function () {
 //     return view('fakultas');
 // });
-Route::resource('fakultas', FakultasController::class);
-Route::resource('prodi', ProdiController::class);
-Route::resource('mahasiswa', MahasiswaController::class);
 
 // Route::get('/prodi', function () {
 //     return view('prodi');
@@ -44,3 +45,7 @@ Route::resource('mahasiswa', MahasiswaController::class);
 //         $data
 //     );
 // });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
