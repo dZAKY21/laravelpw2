@@ -27,6 +27,15 @@
                 <li class="nav-item sidebar-category">
                     <p>Navigation</p>
                     <span></span>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('home') }}">
+                        <i class="mdi mdi-home-modern menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item sidebar-category">
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('fakultas') }}">
