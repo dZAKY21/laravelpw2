@@ -77,6 +77,15 @@
                         </p>
                     </figure>
 
+
+                    <figure class="highcharts-figure">
+                        <div id="container-jk"></div>
+                        <p class="highcharts-description">
+                            tes
+                        </p>
+                    </figure>
+
+
                     <style>
                         .highcharts-figure,
                         .highcharts-data-table table {
@@ -180,4 +189,64 @@
             </div>
         </div>
     </div>
+    <div></div>
+
+
+
+
+    <script>
+        Highcharts.chart('container-jk', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Grafik untuk Jenis Kelamin Mahasiswa'
+            },
+            tooltip: {
+                valueSuffix: '%'
+            },
+            subtitle: {
+                text: 'Source:<a href="https://www.mdpi.com/2072-6643/11/3/684/htm" target="_default">MDPI</a>'
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: [{
+                        enabled: true,
+                        distance: 20
+                    }, {
+                        enabled: true,
+                        distance: -40,
+                        format: '{point.percentage:.1f}%',
+                        style: {
+                            fontSize: '1.2em',
+                            textOutline: 'none',
+                            opacity: 0.7
+                        },
+                        filter: {
+                            operator: '>',
+                            property: 'percentage',
+                            value: 10
+                        }
+                    }]
+                }
+            },
+            series: [{
+                name: 'Percentage',
+                colorByPoint: true,
+                data: [
+                    @foreach ($grafik_jk_mhs as $item)
+                        {
+                            name: '{{ $item->jk }}',
+                            y: {{ $item->jumlah }}
+                        },
+                    @endforeach
+
+
+                ]
+            }]
+        });
+    </script>
+
 @endsection
