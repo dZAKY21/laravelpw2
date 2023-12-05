@@ -34,12 +34,16 @@ class HomeController extends Controller
         JOIN mahasiswas ON prodis.id = mahasiswas.prodi_id
         GROUP BY prodis.nama");
         $grafik_jk_mhs = DB::select("SELECT jk, COUNT(*) as jumlah  FROM mahasiswas GROUP BY jk");
-        
+        $grafik_jk_prodi = DB::select("SELECT prodis.nama, SUM(CASE WHEN mahasiswas.jk = 'L' THEN 1 ELSE 0 END)
+        as laki, SUM(CASE WHEN mahasiswas.jk = 'p' THEN 1 ELSE 0 END) as perempuan FROM `prodis` JOIN mahasiswas
+        ON prodis.id = mahasiswas.prodi_id GROUP BY prodis.nama");
+
         return view('home')
             ->with('fakultas', $fakultas)
             ->with('prodi', $prodi)
             ->with('mahasiswa', $mahasiswa)
             ->with('grafik_mhs', $grafik_mhs)
-            ->with('grafik_jk_mhs', $grafik_jk_mhs);
+            ->with('grafik_jk_mhs', $grafik_jk_mhs)
+            ->with('grafik_jk_prodi', $grafik_jk_prodi);
     }
 }
