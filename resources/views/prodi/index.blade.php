@@ -12,8 +12,10 @@
 
                     </p>
                     </p>
-                    <a href="{{ route('prodi.create') }}"><button
-                            class="btn btn-primary btn-rounded btn-fw">Tambah</button></a>
+                    @can('create', \App\Models\Prodi::class)
+                        <a href="{{ route('prodi.create') }}"><button
+                                class="btn btn-primary btn-rounded btn-fw">Tambah</button></a>
+                    @endcan
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -35,10 +37,13 @@
                                                 <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
-                                                    <button type="submit"
-                                                        class="btn btn-xs btn-danger btn-rounded show_confirm"
-                                                        data-toggle="tooltip" title='Delete'
-                                                        data-nama='{{ $item->nama }}'>Hapus</button>
+
+                                                    @can('delete', $item)
+                                                        <button type="submit"
+                                                            class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                                            data-toggle="tooltip" title='Delete'
+                                                            data-nama='{{ $item->nama }}'>Hapus</button>
+                                                    @endcan
                                                 </form>
                                             </div>
                                     </tr>

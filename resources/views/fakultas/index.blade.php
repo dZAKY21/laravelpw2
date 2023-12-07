@@ -11,8 +11,10 @@
                         Ini Adalah Daftar Fakultas Universitas Multi Data Palembang
 
                     </p>
-                    <a href="{{ route('fakultas.create') }}"><button
-                            class="btn btn-primary btn-rounded btn-fw">Tambah</button></a>
+                    @if (Auth::user()->role == 'A')
+                        <a href="{{ route('fakultas.create') }}"><button
+                                class="btn btn-primary btn-rounded btn-fw">Tambah</button></a>
+                    @endif
                     <div class="table-responsive">
                         <table class="table">
                             <thead>

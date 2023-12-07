@@ -21,19 +21,13 @@ Route::get('/', function () {
 });
 
 //Admin
-Route::middleware(['auth', 'checkRole:A '])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('fakultas', FakultasController::class);
     Route::resource('prodi', ProdiController::class);
     Route::resource('mahasiswa', MahasiswaController::class);
 });
 
-// User
-Route::middleware(['auth', 'checkRole:U '])->group(
-    function () {
-        Route::get('/fakultas', [FakultasController::class, 'index'])->name
-        ('fakulats.index');
-    }
-);
+
 // Route::get('/fakultas', function () {
 //     return view('fakultas');
 // });
