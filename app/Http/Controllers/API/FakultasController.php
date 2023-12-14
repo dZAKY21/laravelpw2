@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fakultas;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,7 +16,7 @@ class FakultasController extends Controller
         return response()->json($fakultas, Response::HTTP_OK);
     }
 
-    public function storred(Request $request)
+    public function store(Request $request)
     {
         $validate = $request->validate([
             'nama' => 'required|
@@ -28,5 +29,46 @@ class FakultasController extends Controller
             $response,
             Response::HTTP_CREATED
         );
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'nama' => 'required'
+        ]);
+        $fakultas = Fakultas::where('id', $id)->update($validate);
+
+        if ($fakultas) {
+            $response['success'] = true;
+            $response['message'] = 'Fakultas berhasil diperbarui';
+            return response()->json($response, Response::HTTP_OK);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Data fakultas tidak ditemukan';
+            return response()->json($response, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $fakultas = Fakultas::where('id', $id);
+        if (count($fakultas->get()) > 0) {
+            $prodi = Prodi::where('fakultas_id', $id)->get();
+            if (count($prodi) > 0) {
+                $response['success'] = false;
+                $response['message'] = 'Data fakultas tidak diizijin hapus dikarenakan
+                digunakan di tabel prodi';
+                return response()->json($response, Response::HTTP_NOT_FOUND);
+            } else {
+                $fakultas->delete();
+                $response['success'] = true;
+                $response['message'] = 'Fakultas berhasil dihapus';
+                return response()->json($response, Response::HTTP_OK);
+            }
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Data fakultas tidak ditemukan';
+            return response()->json($response, Response::HTTP_NOT_FOUND);
+        }
     }
 }
